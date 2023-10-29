@@ -5,13 +5,13 @@ import listItems from './navigations'
 
 function NavBar() {
 	return (
-		<ul className="flex flex-row ml-auto">
-              { listItems.map(({name,url})=><li>
+		<ul className="absolute w-full top-0 mt-[5rem] md:mt-0 md:flex md:flex-row ml-auto">
+              { listItems.map(({name,url})=><li className="text-black p-4 bg-small md:bg-large 
+              									hover:bg-hover-color hover:text-black" 
+              									key={name}>
                 <Link href={url} 
-                className="block py-2 pl-3 pr-4 
-                			text-white bg-blue-700" 
-                			aria-current="page">
-                			{name}
+                className="" aria-current="page">
+                			{name.toUpperCase()}
                 </Link>
               </li>)}
               

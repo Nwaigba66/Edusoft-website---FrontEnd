@@ -9,8 +9,17 @@ const listItems = [
 		},
 		{
 			name:"consultation",
-			url: '#'
+			url: '/'
 		},
+		{
+			name:"contact",
+			url: '/'
+		},
+		{
+			name:"faq",
+			url: '/'
+		},
+
 	]
 
 export default listItems

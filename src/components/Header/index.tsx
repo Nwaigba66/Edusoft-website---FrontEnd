@@ -3,12 +3,15 @@ import NavBar from '@/components/NavBar'
 
 function Header() {
 	return (
-		<header className=" flex flex-row 
+		<header className="h-[5rem] relative flex flex-row 
 							items-center 
-							bg-blue-900 py-4
-							text-white">
+							bg-blue-900 
+							text-white" >
 			<h1>Edusoft</h1>
 			<NavBar />
+			<h2 className="ml-auto cursor-pointer">
+				Login/Logout
+			</h2>
 		</header>
 	)
 }
