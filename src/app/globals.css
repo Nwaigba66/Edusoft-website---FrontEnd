@@ -17,11 +17,10 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply flex w-full min-h-screen bg-white;
+}
+.main-content{
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  @apply bg-white w-full;
 }
