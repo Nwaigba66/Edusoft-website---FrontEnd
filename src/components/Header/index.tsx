@@ -7,7 +7,7 @@ function Header() {
 							items-center 
 							bg-blue-900 
 							text-white" >
-			<h1>Edusoft</h1>
+			<h1 className="ml-3 text-3xl">Edusoft</h1>
 			<NavBar />
 			<h2 className="ml-auto cursor-pointer">
 				Login/Logout
