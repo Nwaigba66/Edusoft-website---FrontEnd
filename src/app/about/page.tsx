@@ -4,8 +4,7 @@ function About() {
   return (
     <div className='flex justify-center items-center '>
       <h1>ABOUT STATEMENT</h1>
-    </div>
-    
+    </div>  
   )
 }
 
