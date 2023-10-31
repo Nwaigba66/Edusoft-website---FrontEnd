@@ -3,7 +3,7 @@ import NavBar from '@/components/NavBar'
 
 function Header() {
 	return (
-		<header className="head h-[5rem] relative flex flex-row 
+		<header className="head relative flex flex-row 
 							items-center 
 							bg-blue-900 
 							text-white" >

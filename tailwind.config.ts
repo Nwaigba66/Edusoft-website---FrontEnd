@@ -17,7 +17,7 @@ const config: Config = {
         'hover-color':'#e6e898',
         'large':'#0932C3',
         'small':'#e9d6ee',
-        'placeholder': '#cfcfcf',
+        'placeholder': '#d9d9d9',
         'placeholder-text':'#333333',
         'button': '#2b8f41'
       }
