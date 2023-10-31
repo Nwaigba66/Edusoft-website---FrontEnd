@@ -19,8 +19,35 @@
 body {
   @apply flex w-full min-h-screen bg-white;
 }
-.main-content{
+.main-container{
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+  "head head head head head"
+  "main main main main sidebar"
+  "footer footer footer footer footer";
   @apply bg-white w-full;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+}
+.foot{
+  grid-area: footer;
+}
+.head{
+  grid-area: head;
+}
+
+.sidebar{
+  grid-area: sidebar;
+}
+.maincontent{
+  grid-area: main;
+}
+.sidebar section input, 
+.sidebar section select,
+.sidebar section button{
+  @apply w-[13rem] min-h-[2rem] rounded;
+}
+
+.sidebar section div h3 {
+  @apply text-center;
 }

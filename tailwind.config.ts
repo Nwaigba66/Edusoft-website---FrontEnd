@@ -16,7 +16,10 @@ const config: Config = {
       colors:{
         'hover-color':'#e6e898',
         'large':'#0932C3',
-        'small':'#e9d6ee'
+        'small':'#e9d6ee',
+        'placeholder': '#cfcfcf',
+        'placeholder-text':'#333333',
+        'button': '#2b8f41'
       }
     },
   },
