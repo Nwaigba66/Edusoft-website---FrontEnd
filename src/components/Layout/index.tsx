@@ -6,11 +6,13 @@ import SideBar from '@/components/SideBar'
 
 function Layout({children,}:{children: React.ReactNode}) {
 	return (
-		<main className="main-content">
+		<main className="main-container">
 			<Header />
+			<div className="maincontent">
 				{children}
+			</div>
 			<Footer />
-			
+			<SideBar />
 		</main>
 	)
 }
