@@ -4,34 +4,27 @@ import listItems from './navigations'
 import { Input } from 'postcss'
 
 
-function NavBar() {
+function NavBar({hide}:{hide:bool}) {
 	return (
-		<ul className="absolute w-full md:w-auto top-0 mt-[5rem] 
-						md:static md:mt-0 md:flex 
-						md:flex-row md:ml-auto">
-              { listItems.map(({name,url})=><li className="text-black md:text-white p-4 bg-small md:bg-large 
-              									hover:bg-hover-color hover:text-black" 
+		<div className={`${hide && "hidden"} absolute flex flex-col md:flex-row md:ml-auto
+												md:items-center w-full md:w-auto md:pr-4
+										top-0 mt-[5rem] md:static md:mt-0 md:flex` }>
+			<ul className="md:flex md:flex-row md:ml-auto">
+              { listItems.map(({name,url})=><li className="text-black md:text-white 
+              									p-4 bg-small md:bg-large hover:bg-hover-color hover:text-black" 
               									key={name}>
                 <Link href={url} 
-                className="inline-block" aria-current="page">
+                className="inline-block">
                 			{name.toUpperCase()}
                 </Link>
               </li>)}
-			  <h5 className='ml-6 items-right'>Create an account</h5>
-
-			
-
-
-			  <div className='flex flex-row items-center ml-58'>
-			 
-			  	<span className="username" placeholder='Username'></span>
-				  <input className="inp" type="text" placeholder='Username'></input>
-				</div>  
-				  <div className='flex flex-row items-center ml-6'>
-				  <input className="ine" type="text" id="password" placeholder='Password'></input>
-			  </div>
-
-		</ul>
+			</ul>
+			<h2 className="w-full md:ml-5 cursor-pointer rounded
+										bg-gray-200 p-4 text-black">
+				Login/Logout
+			</h2>
+		</div>
+		
 
 			 
 			  
