@@ -1,11 +1,17 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 
-export default function SideBar() {
+export default function SideBar({displaySearch}:{
+  displaySearch: bool
+}) {
+  
+
   return (
-    <div className="sidebar bg-white pt-[1rem] pb-[3rem]">
-      <section className=" flex flex-col
-                          justify-between items-center 
-                          h-full w-full">
+    <div className={`sidebar fixed ${!displaySearch ? "hidden": "flex" }  flex-col items-center top-0 w-full h-full
+                         bg-black bg-opacity-20 md:bg-transparent left-0 md:sticky md:w-auto md:flex`}>
+      <section className= {` flex flex-col bg-blue-500 rounded md:bg-transparent
+                                justify-around items-center 
+                                h-full w-80 `}>
         <div>
           <h3>Enter a key word</h3>
           <input className="text-center bg-placeholder h-[45px]

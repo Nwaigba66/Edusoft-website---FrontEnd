@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   description: 'Education Abroad',
 }
 
-export default function RootLayout({
-  children,
-}: {
+export default async function RootLayout(props: {
   children: React.ReactNode
+  auth: React.ReactNode
 }) {
   return (
     <html lang="en">
       <body>
         <Layout>
-          {children}
+
+          {props.children}
         </Layout>
       </body>
     </html>

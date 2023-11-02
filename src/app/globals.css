@@ -21,43 +21,46 @@
 body {
   @apply flex w-full min-h-screen bg-white;
 }
+
 .main-container{
   display: grid;
-  grid-template-areas:
-  "head head head head head"
-  "main main main main sidebar"
-  "main main main main ."
-  "footer footer footer footer footer";
-  @apply bg-white w-full;
-  grid-template-rows: auto 1fr auto auto;
-  grid-template-columns:1fr 1fr 1fr 1fr 1fr;
+  @apply bg-white w-full h-full;
+  grid-template-rows: auto 1fr auto;
 }
 .foot{
-  grid-area: footer;
 }
 .head{
-  grid-area: head;
   height: var(--header-height);
   @apply sticky top-0;
 }
 
 .sidebar{
-  grid-area: sidebar;
-  @apply sticky bg-transparent;
   top: var(--header-height);
   max-height: calc(100vh - 10rem);
 }
 .maincontent{
-  grid-area: main;
+  display:grid;
+  grid-template-columns: 1fr auto;
   min-height: calc(100vh - var(--header-height));
 
 }
 .sidebar section input, 
 .sidebar section select,
-.sidebar section button{
+.sidebar section button
+{
   @apply w-[13rem] min-h-[2rem] rounded;
 }
 
 .sidebar section div h3 {
   @apply text-center;
+}
+
+.below-header{
+  top: var(--header-height);
+}
+.login-form label{
+  @apply text-xl;
+}
+.login-form input{
+  @apply border-solid border-2 h-[3rem] rounded text-center shadow;
 }
