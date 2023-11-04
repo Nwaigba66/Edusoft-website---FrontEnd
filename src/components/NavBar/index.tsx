@@ -5,7 +5,7 @@ import listItems from './navigations'
 import { Input } from 'postcss'
 
 
-function NavBar(props:{hide:bool, toggleNav:()=>null}) {
+function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
 
 	return (
 		<div className={`${props.hide && "hidden"} absolute flex flex-col md:flex-row md:ml-auto

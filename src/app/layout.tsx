@@ -12,13 +12,11 @@ export const metadata: Metadata = {
 
 export default async function RootLayout(props: {
   children: React.ReactNode
-  auth: React.ReactNode
 }) {
   return (
     <html lang="en">
       <body>
         <Layout>
-
           {props.children}
         </Layout>
       </body>

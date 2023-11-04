@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 export default function SideBar({displaySearch}:{
-  displaySearch: bool
+  displaySearch: boolean
 }) {
   
 
@@ -21,14 +21,14 @@ export default function SideBar({displaySearch}:{
         <div>
           <h3 >Select a Country</h3>
           <select name="" id="country" className="bg-placeholder h-[45px]">
-            <option value="ng" default>Nigeria</option>
+            <option value="ng" >Nigeria</option>
             <option value="uk">United Kingdom</option>
           </select>
         </div>
         <div>
            <h3 >Select a Course</h3>
             <select name="" id="country" className="bg-placeholder h-[45px]">
-              <option value="software" default>Software Engineering</option>
+              <option value="software">Software Engineering</option>
               <option value="nursing">Nursing</option>
             </select>
         </div>
