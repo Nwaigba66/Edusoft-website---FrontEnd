@@ -58,7 +58,7 @@ function Registration() {
 							<label className="w-full md:w-32" htmlFor={key}>{name}:</label>
 							{!options && <input className="w-full md:w-64" id={key} type={type} placeholder={`Enter ${name}`} required/>}	
 							{options && <select className="w-full md:w-64" name={key} id={key}>
-								{options.map(itm=><option value={itm}>{itm}</option>)}
+								{options.map(itm=><option key={itm} value={itm}>{itm}</option>)}
 							</select>}
 						</div>
 
