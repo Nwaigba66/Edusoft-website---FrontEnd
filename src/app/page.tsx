@@ -7,7 +7,7 @@ import { Component } from 'react';
 
 export default function home() {
   return (
-    <div className="flex justify-center flex-col items-center">
+    <div className="flex justify-center h-full flex-col items-center">
       <h2 className="text-3xl">
         Welcome To Edusoft
       </h2>
