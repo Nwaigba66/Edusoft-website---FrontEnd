@@ -47,7 +47,7 @@ const initialFormState : {
 
 function Registration() {
 	return (
-	<div className="flex flex-row items-center ">
+	<div className="flex flex-row items-center">
 			<div className="flex flex-col items-center justify-center w-full h-full">
 				<h2 className="text-3xl my-[5rem]  ">New User Account Registration</h2>
 				<form className="registration-form flex flex-col justify-around gap-10 w-[25rem]" action="">
@@ -67,7 +67,7 @@ function Registration() {
 					<div className="flex justify-center">
 						<button className="py-2 px-4 bg-button text-white text-xl rounded">Complete Registration</button>
 					</div>
-					<div className="flex justify-center nowrap w-full">
+					<div className="flex justify-center nowrap w-full mb-10">
 						Have an Account? <Link className="text-blue-500" href="/auth/login">Login to  your Account</Link>
 					</div>
 				</form>
