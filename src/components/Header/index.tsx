@@ -1,17 +1,28 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import NavBar from '@/components/NavBar'
+import Image from 'next/image'
+import MenuIcon from '@/components/Icons/MenuIcon'
+import CloseIcon from '@/components/Icons/CloseIcon'
 
 function Header() {
+	const [hideMenu, setHideMenu] = useState(false)
+	const toggleNav = ()=>{
+		setHideMenu(prevState=>!prevState)
+	}
+
 	return (
-		<header className="h-[5rem] relative flex flex-row 
-							items-center 
+		<header className="head relative flex flex-row 
+							items-center z-20
 							bg-blue-900 
 							text-white" >
 			<h1 className="ml-3 text-3xl">Edusoft</h1>
-			<NavBar />
-			<h2 className="ml-auto cursor-pointer">
-				Login/Logout
-			</h2>
+			<NavBar hide={hideMenu} toggleNav={toggleNav} />
+			<div onClick={()=>setHideMenu(prevState=>!prevState)} className="md:hidden
+																	ml-auto p-4 cursor-pointer">
+				{hideMenu && <MenuIcon color="white" />}
+				{!hideMenu && <CloseIcon color="white" />}
+			</div>
 		</header>
 	)
 }
