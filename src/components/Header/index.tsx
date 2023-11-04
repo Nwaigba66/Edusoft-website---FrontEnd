@@ -6,7 +6,7 @@ import MenuIcon from '@/components/Icons/MenuIcon'
 import CloseIcon from '@/components/Icons/CloseIcon'
 
 function Header() {
-	const [hideMenu, setHideMenu] = useState(false)
+	const [hideMenu, setHideMenu] = useState(true)
 	const toggleNav = ()=>{
 		setHideMenu(prevState=>!prevState)
 	}
