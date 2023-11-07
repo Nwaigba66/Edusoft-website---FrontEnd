@@ -24,3 +24,10 @@ body {
   grid-template-rows: auto 1fr auto;
   @apply bg-white w-full;
 }
+.consultation-form label{
+  @apply text-xl;
+}
+.consultation-form input{
+  @apply border-solid border-2 h-[3rem] rounded text-center shadow;
+}
+

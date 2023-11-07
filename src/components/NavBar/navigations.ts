@@ -10,7 +10,7 @@ const listItems = [
 		},
 		{
 			name:"consultation",
-			url: '/'
+			url: '/consultation'
 		},
 		{
 			name:"contact",
