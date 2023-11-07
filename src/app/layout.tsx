@@ -12,15 +12,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout(props: {
   children: React.ReactNode
-  search: React.ReactNode
 }) {
-  const doSearch = false
   return (
     <html lang="en">
       <body>
         <Layout>
-          {!doSearch && props.children}
-          {doSearch && props.search}
+          {props.children}
         </Layout>
       </body>
     </html>
