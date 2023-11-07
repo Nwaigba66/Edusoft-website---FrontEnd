@@ -16,16 +16,12 @@ const config: Config = {
       colors:{
         'hover-color':'#e6e898',
         'large':'#0932C3',
-<<<<<<< Updated upstream
-        'small':'#e9d6ee'
-=======
         'small':'#e9d6ee',
         'placeholder': '#d9d9d9',
         'placeholder-text':'#333333',
         'button': '#2b8f41',
         'principles': '#F7F7FA',
         'booking': '#E9D6EE',
->>>>>>> Stashed changes
       }
     },
   },

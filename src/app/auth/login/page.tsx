@@ -9,7 +9,7 @@ function Login() {
 				<Image 
 					src="/login.png" 
 					width={500} 
-					height={600} 
+					height={300} 
 					alt="login to your account" />
 			</div>
 			<div className="flex flex-col items-center justify-center w-full h-full">
