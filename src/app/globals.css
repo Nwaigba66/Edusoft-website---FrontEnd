@@ -58,10 +58,12 @@ body {
 .below-header{
   top: var(--header-height);
 }
-.login-form label{
+.login-form label, .registration-form label{
   @apply text-xl;
 }
-.login-form input{
+.login-form input, 
+.registration-form input,
+.registration-form select{
   @apply border-solid border-2 h-[3rem] rounded text-center shadow;
 }
 .consultation-form label{
@@ -69,5 +71,10 @@ body {
 }
 .consultation-form input{
   @apply border-solid border-2 h-[3rem] rounded text-center shadow;
+}
+.form-group{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  @apply bg-red-300;
 }
 

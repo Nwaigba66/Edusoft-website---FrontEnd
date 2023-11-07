@@ -16,7 +16,7 @@ function Layout({children,}:{children: React.ReactNode}) {
 			<div className="maincontent relative">
 				<div className="px-4">
 					{children}
-					      <div  className={`fixed below-header right-0 flex z-10  w-full md:hidden`}>
+					      <div  className={`fixed below-header right-2 flex z-10  w-full md:hidden`}>
 					        <span onClick={()=>setDisplaySearch(prevState=>!prevState)} className={`${!displaySearch && "rotate-180"} ml-auto cursor-pointer`}>
 					          {displaySearch && <MenuOpen color="green" />}
 					          {!displaySearch && <ManageSearchIcon color="green" />}

@@ -14,11 +14,11 @@ const listItems = [
 		},
 		{
 			name:"contact",
-			url: '/'
+			url: '/contact'
 		},
 		{
 			name:"faq",
-			url: '/'
+			url: '/faq'
 		},
 
 	]
