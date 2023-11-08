@@ -44,8 +44,8 @@ export default function SideBar({displaySearch, toggleSidebar}:{
   }
   
   return (
-    <div className={`sidebar fixed ${!displaySearch ? "hidden": "flex" }  flex-col items-center top-0 w-full h-full
-                         bg-black bg-opacity-20 md:bg-transparent left-0 md:sticky md:w-auto md:flex`}>
+    <div className={`sidebar fixed ${!displaySearch ? "hidden": "flex" }  flex-col items-center w-full h-full
+                         bg-black bg-opacity-20 md:bg-transparent left-0  md:w-auto md:flex`}>
       <form onSubmit={handleSubmit} action="" className= {` flex flex-col bg-blue-500 rounded md:bg-transparent
                                 justify-around items-center 
                                 h-full w-80 `}>

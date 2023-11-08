@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.search-page {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	@apply h-auto mx-5 mt-2 overflow-y-auto gap-2;
+}

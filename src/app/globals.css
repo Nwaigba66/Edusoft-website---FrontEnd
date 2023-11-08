@@ -31,12 +31,13 @@ body {
 }
 .head{
   height: var(--header-height);
-  @apply sticky top-0;
+  @apply sticky top-0 !important;
 }
 
 .sidebar{
   top: var(--header-height);
   max-height: calc(100vh - 10rem);
+  @apply md:sticky top-[--header-height] !important;
 }
 .maincontent{
   display:grid;

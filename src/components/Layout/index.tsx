@@ -5,6 +5,8 @@ import Footer from '@/components/Footer'
 import SideBar from '@/components/SideBar'
 import MenuOpen from '@/components/Icons/MenuOpen'
 import ManageSearchIcon from '@/components/Icons/ManageSearchIcon'
+import { Provider } from 'react-redux';
+import { store } from '@/services/store'
 
 
 
@@ -16,6 +18,7 @@ function Layout({children,}:{children: React.ReactNode}) {
 	}
 
 	return (
+		<Provider store={store}>
 		<main className="main-container">
 			<Header />
 			<div className="maincontent relative">
@@ -33,6 +36,7 @@ function Layout({children,}:{children: React.ReactNode}) {
 			</div>
 			<Footer />
 		</main>
+		</Provider>
 	)
 }
 

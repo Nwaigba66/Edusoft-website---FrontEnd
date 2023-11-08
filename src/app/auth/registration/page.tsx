@@ -106,10 +106,10 @@ function Registration() {
 	}
 
 	return (
-	<div className="flex flex-row items-center">
+	<div className="flex flex-row items-center w-full">
 			<div className="flex flex-col items-center justify-center w-full h-full">
-				<h2 className="text-3xl my-[5rem]  ">New User Account Registration</h2>
-				<form onSubmit={handleSubmit} className="registration-form flex flex-col justify-around gap-10 w-[25rem]" action="">
+				<h2 className="text-3xl my-[5rem] break-normal">New User Account Registration</h2>
+				<form onSubmit={handleSubmit} className="registration-form flex flex-col justify-around gap-8" action="">
 					
 					{Object.keys(initialFormState).map((key)=>{
 						const {name, type } = initialFormState[key];
