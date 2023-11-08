@@ -10,7 +10,13 @@ function SearchPage() {
 	const router = useRouter()
 	const params = useParams()
 	const queries = useSearchParams()
-	const { data, isLoading } = useFetchCoursesQuery()
+	const country = queries.get('country')
+	const search = queries.get('search')
+	const course = queries.get('course')
+
+	const query = `${search?"search="+search:""}
+	${country?"&country="+ country:""}${course?"&course="+ course:""}`
+	const { data, isLoading } = useFetchCoursesQuery(query)
 	
 	
 
@@ -41,6 +47,7 @@ function SearchPage() {
 									{name}
 								</div>
 							</li>)}
+							{data.results.length === 0 && <li className="text-2xl flex justify-center items-center">No Result Found</li>}
 						</ul>}
 
 			</div>

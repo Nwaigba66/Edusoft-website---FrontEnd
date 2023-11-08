@@ -7,6 +7,7 @@ const initialFormState : {
   [key:string]:string
 } = {
   search:"",
+  course:""
 }
 
 export default function SideBar({displaySearch, toggleSidebar}:{
@@ -15,7 +16,7 @@ export default function SideBar({displaySearch, toggleSidebar}:{
 }) {
 
   const [searchForm, setSearchForm] = useState(initialFormState)
-  const { search } = searchForm
+  const { search, course } = searchForm
   const courseRef = useRef<HTMLSelectElement>(null)
   const countryRef = useRef<HTMLSelectElement>(null)
 
@@ -25,22 +26,22 @@ export default function SideBar({displaySearch, toggleSidebar}:{
     e.preventDefault();
     const course = courseRef.current?.value;
     const country = countryRef.current?.value;
-    const searchData = `search=${search? search: ""}`
-    const countryData = `country=${country? country:""}`
-    const courseData = `course=${course?course:""}`
+    const searchData = `${search? "search=" + search: ""}`
+    const countryData = `${country != "select" ? "country=" + country:""}`
+    const courseData = `${course != "select" ? "course=" + course:""}`
 
-    if (course || country || search){
+    if (countryData.length > 0 || courseData.length > 0 || search.length > 0){
       toggleSidebar()
-      router.push(`/search/?${search.trim()?searchData+"&":""}${country?countryData + "&":""}${course?courseData:""}`) 
+      router.push(`/search/?${search ?searchData:""}${countryData? "&" + countryData :""}${courseData? "&" + courseData:""}`) 
     }
     
   }
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     e.preventDefault()
     const { name,value} = e.target
     setSearchForm(prevState=>({
-      ...prevState,[name]:value}))
+      ...prevState,[name]:value.trim()}))
   }
   
   return (
@@ -51,20 +52,22 @@ export default function SideBar({displaySearch, toggleSidebar}:{
                                 h-full w-80 `}>
         <div>
           <h3>Enter a key word</h3>
-          <input onChange={handleInput} value={search} name="search" className="text-center bg-placeholder h-[45px]
+          <input onChange={handleInput} disabled={course !== "select" && course != ""} value={search} name="search" className="text-center bg-placeholder h-[45px]
                             text-placeholder-text rounded"
                             type="text" placeholder="search course "/>
         </div>
         <div>
           <h3 >Select a Country</h3>
           <select ref={countryRef} name="country" id="country" className="bg-placeholder h-[45px]">
+             <option value="select" >----------</option>
             <option value="ng" >Nigeria</option>
             <option value="uk">United Kingdom</option>
           </select>
         </div>
         <div>
            <h3 >Select a Course</h3>
-            <select ref={courseRef}  name="course" id="course" className="bg-placeholder h-[45px]">
+            <select ref={courseRef} onChange={handleInput} disabled={search.length > 0}  name="course" id="course" className="bg-placeholder h-[45px]">
+              <option value="select">------------</option>
               <option value="software">Software Engineering</option>
               <option value="nursing">Nursing</option>
             </select>
