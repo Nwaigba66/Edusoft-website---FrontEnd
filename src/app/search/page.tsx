@@ -1,44 +1,49 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
+import { useFetchCoursesQuery } from '@/services/api'
+import BackIcon from '@/components/Icons/BackIcon'
+import './search.css';
 
-
-const initialState: {
-	query:string,
-	isLoading:boolean
-} = {
-	query:"",
-	isLoading:true
-}
 
 function SearchPage() {
 	const router = useRouter()
 	const params = useParams()
 	const queries = useSearchParams()
-	const [searchData, setSearchData] = useState(initialState)
-	const { query, isLoading } = searchData
+	const { data, isLoading } = useFetchCoursesQuery()
 	
-	useEffect(()=>{
-			setSearchData(prevState=>{
-			return {
-				...prevState,
-				isLoading:false,
-				query:""}});
-
-	},[])
+	
 
 	return (
-		<div className="flex flex-col justify-center items-center text-3xl flex mt-8 w-full h-[90vh] overscroll-y-auto mb-4 text-blue-300 bg-red-100">
-			This is the Search Page
-			<button onClick={()=>router.back()}>Back</button>
-			{ isLoading && <div>
-							<span className="inline-block bg-transparent border-solid border-r-8 border-blue-500
+		<div className="search-page">
+			<div className="flex justify-center relative h-[5rem] text-xl ">
+							<button className="absolute shadow left-0" onClick={()=>router.back()}>
+								<BackIcon color="gray" />
+							</button>
+							Search Results by Institutions
+			</div>
+			
+			<div className=" min-h-[10rem]">
+			
+			{isLoading &&  <div className="flex justify-center items-center">
+								<span className="inline-block bg-transparent border-solid border-r-8 border-blue-500
 										animate-spin h-[5rem] w-[5rem] rounded-full bg-green-500">
 								
-							</span>
-							Edusoft
-						</div>}
-			{!isLoading && <div>QueryParams: {query}</div>}
+								</span>
+							Loading...
+			</div>}
+			{!isLoading && data && <ul>
+							{data.results.map(({name,id, university})=><li className="flex flex-col border-b-2 border-gray-300" key={id}>
+								<div className="text-sm text-blue-400 underline">
+									{university}
+								</div>
+								<div className="ml-auto ">
+									{name}
+								</div>
+							</li>)}
+						</ul>}
+
+			</div>
 		</div>
 	)
 }
