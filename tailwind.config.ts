@@ -20,7 +20,9 @@ const config: Config = {
         'small':'#e9d6ee',
         'placeholder': '#d9d9d9',
         'placeholder-text':'#333333',
-        'button': '#2b8f41'
+        'button': '#2b8f41',
+        'principles': '#F7F7FA',
+        'booking': '#E9D6EE',
       }
     },
   },
