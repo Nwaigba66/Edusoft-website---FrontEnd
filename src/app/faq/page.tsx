@@ -1,13 +1,24 @@
-'Use Client'
 import React from 'react'
 import Image from 'next/image'
 
 
 const faqList = [
-
+    {
+    name:"",
+    url:''
+},
+{
+    name:"",
+    url:''
+},
+{
+    name:"",
+    url:''
+},
+  
 ]
 
-function FAQ() {
+function Faq() {
   return (
     
     <div className='flex flex-col'>
@@ -20,4 +31,4 @@ function FAQ() {
   )
 }
 
-export default FAQ
+export default Faq;

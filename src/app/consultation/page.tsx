@@ -45,7 +45,7 @@ function Consultation() {
     <div className='items-center justify-center w-full h-full bg-pink-220'> 
           
      <div className='flex flex-col justify-center items-center mt-10'>
-        <h1  className='item-center text-xl'>YES WE'RE HAPPY YOU'RE HERE</h1>
+        <h1  className='item-center text-xl'>{`YES WE'RE HAPPY YOU'RE HERE`}</h1>
         <h1 className='text-xl font-light'>take the Action</h1>
         
         <h1>SCROLL DOWN TO BOOK</h1> 
