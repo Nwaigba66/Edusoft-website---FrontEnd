@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.course-detail {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	@apply h-full ;
+}

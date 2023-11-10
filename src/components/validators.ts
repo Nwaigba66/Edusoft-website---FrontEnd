@@ -6,7 +6,7 @@ export function textValidator(value:string){
 export function emailValidator(value:string){
 	if (value.length === 0) return "This Field is required";
 	if (/\s/.test(value)) return "space character not allowed";
-	if (/^[a-zA-z]+[0-9]*\@\w+(\.com|\.co\.uk)$/.test(value)) return "";
+	if (/^[a-zA-z0-9]+\@\w+(\.com|\.co\.uk)$/.test(value)) return "";
     return "invalid email"
 }
 
