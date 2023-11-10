@@ -51,12 +51,7 @@ body {
 .registration-form select{
   @apply border-solid border-2 h-[3rem] rounded text-center shadow;
 }
-.consultation-form label{
-  @apply text-xl;
-}
-.consultation-form input{
-  @apply border-solid border-2 h-[3rem] rounded text-center shadow;
-}
+
 .form-group{
   display: grid;
   grid-template-columns: 1fr 2fr;

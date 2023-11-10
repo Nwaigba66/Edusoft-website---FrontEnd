@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {useAppDispatch, useAppSelector } from '@/services/hooks'
 import {login} from '@/services/auth-slice'
 import { useRouter } from 'next/navigation'
+import './login.css'
 
 const initalLoginState = {
 	email:"",
@@ -60,16 +61,16 @@ function Login() {
 					alt="login to your account" />
 			</div>
 			<div className="flex flex-col items-center justify-center w-full h-full">
-				<h2 className="text-xl my-[5rem]  ">Existing Account</h2>
+				<h2 className="text-2xl my-[5rem]">Existing Account</h2>
 				{loginState.error && <div className="text-2xl text-red-500">{loginState.error}</div>}
 				<form onSubmit={handleLogin} className="login-form flex flex-col justify-around gap-10 w-80" action="">
-					<div className="flex items-center gap-2">
-						<label className="flex-1" htmlFor="email">Email</label>
-						<input onChange={handleInput} name="email" className="flex-2 ml-4" id='email' type="text" placeholder="enter email" />
+					<div className="login-group">
+						<label className="" htmlFor="email">Email:</label>
+						<input onChange={handleInput} name="email" className="md:ml-auto md:w-[15rem]" id='email' type="text" placeholder="enter email" />
 					</div>
-					<div className="flex items-center gap-2">
-						<label className="flex-1" htmlFor="password">Password</label>
-						<input  onChange={handleInput} name="password" className="flex-2 ml-4" id='password' type="password" placeholder="enter password"/>	
+					<div className="login-group">
+						<label className="" htmlFor="password">Password:</label>
+						<input  onChange={handleInput} name="password" className="md:ml-auto md:w-[15rem]" id='password' type="password" placeholder="enter password"/>	
 					</div>
 
 					<div className="flex justify-center">
