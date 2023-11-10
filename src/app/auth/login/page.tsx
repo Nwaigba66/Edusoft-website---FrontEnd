@@ -1,8 +1,55 @@
-import React from 'react'
+'use client'
+import React, {useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import {useAppDispatch, useAppSelector } from '@/services/hooks'
+import {login} from '@/services/auth-slice'
+import { useRouter } from 'next/navigation'
 
+const initalLoginState = {
+	email:"",
+	password:"",
+	error:""
+}
 function Login() {
+	const router = useRouter()
+	const dispatch = useAppDispatch()
+	const { isLoggedIn, password, email, username } = useAppSelector(state=>state.auth)
+
+	const [loginState, setLoginState] = useState(initalLoginState)
+	
+	function handleLogin(e:React.FormEvent){
+		e.preventDefault();
+		if (loginState.email === email && loginState.password === password){
+			setLoginState(prevState=>({
+				...prevState,
+				"error":""
+			}))
+			dispatch(login({email:loginState.email, password:loginState.password}))
+		}
+		else {
+			setLoginState(prevState=>({
+				...prevState,
+				"error":"Invalid email or password"
+			}))
+		}
+
+	}
+
+	function handleInput(e:React.ChangeEvent<HTMLInputElement>){
+		const {name, value } = e.target;
+		setLoginState(prevState=>({
+			...prevState,
+			[name]:value.trim()
+		}))
+	}
+
+	if (isLoggedIn){
+		return <div className="flex flex-col justify-center items-center">
+				<div className="text-xl text">Signed in as {username}</div>
+			<button className="inline-block bg-green-400 text-white p-4" onClick={()=>router.push('/')}>Back to Home Page</button>
+		</div>
+	}
 	return (
 		<div className="flex flex-row items-center">
 			<div className="hidden lg:flex">
@@ -14,14 +61,15 @@ function Login() {
 			</div>
 			<div className="flex flex-col items-center justify-center w-full h-full">
 				<h2 className="text-xl my-[5rem]  ">Existing Account</h2>
-				<form className="login-form flex flex-col justify-around gap-10 w-80" action="">
+				{loginState.error && <div className="text-2xl text-red-500">{loginState.error}</div>}
+				<form onSubmit={handleLogin} className="login-form flex flex-col justify-around gap-10 w-80" action="">
 					<div className="flex items-center gap-2">
 						<label className="flex-1" htmlFor="email">Email</label>
-						<input className="flex-2 ml-4" id='email' type="text" placeholder="enter email" />
+						<input onChange={handleInput} name="email" className="flex-2 ml-4" id='email' type="text" placeholder="enter email" />
 					</div>
 					<div className="flex items-center gap-2">
 						<label className="flex-1" htmlFor="password">Password</label>
-						<input className="flex-2 ml-4" id='password' type="text" placeholder="enter password"/>	
+						<input  onChange={handleInput} name="password" className="flex-2 ml-4" id='password' type="password" placeholder="enter password"/>	
 					</div>
 
 					<div className="flex justify-center">

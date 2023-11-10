@@ -10,15 +10,15 @@ const listItems = [
 		},
 		{
 			name:"consultation",
-			url: '/'
+			url: '/consultation'
 		},
 		{
 			name:"contact",
-			url: '/'
+			url: '/contact'
 		},
 		{
 			name:"faq",
-			url: '/'
+			url: '/faq'
 		},
 
 	]

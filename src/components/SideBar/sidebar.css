@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.sidebar{
+  top: var(--header-height);
+  max-height: calc(100vh - 10rem);
+  @apply md:sticky top-[--header-height] !important;
+}
+.sidebar form input, 
+.sidebar form select,
+.sidebar form button
+{
+  @apply w-[13rem] min-h-[2rem] rounded;
+}
+
+.sidebar form div h3 {
+  @apply text-center;
+}
+
+#sidebar-toggler{
+  visibility: hidden;
+  position: absolute;
+}

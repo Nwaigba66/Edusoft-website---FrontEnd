@@ -2,6 +2,11 @@
 import React, {useState} from 'react'
 import Link from 'next/link'
 import { textValidator, passwordValidator, emailValidator } from '@/components/validators'
+import { useAppSelector, useAppDispatch } from '@/services/hooks'
+import { register } from '@/services/auth-slice';
+import { useRouter } from 'next/navigation'
+import './registration.css'
+
 
 interface FormProps {
 	name:string
@@ -67,6 +72,9 @@ Object.keys(initialFormState).forEach(val=>{
 
 function Registration() {
 	const [formValues, setFormValue] = useState(initialValues)
+	const { isLoggedIn, username } = useAppSelector(state=>state.auth)
+	const dispatch = useAppDispatch()
+	const router = useRouter()
 
 
 	function handleInput(e: React.ChangeEvent<HTMLInputElement>){
@@ -101,8 +109,24 @@ function Registration() {
 			}
 			return copyState
 			})
-		return;
 
+		if (isValid){
+			dispatch(register({username:formValues.username.value, 
+				email:formValues.email.value,
+				password:formValues.password.value}))
+			setFormValue(initialValues);
+			router.push('/auth/login')
+
+
+		}
+		
+
+	}
+	if (isLoggedIn){
+		return <div className="flex flex-col justify-center items-center">
+				<div className="text-xl text">Signed in as {username}</div>
+			<button className="inline-block bg-green-400 text-white p-4" onClick={()=>router.push('/')}>Back to Home Page</button>
+		</div>
 	}
 
 	return (
@@ -118,8 +142,15 @@ function Registration() {
 							<label className="w-full md:w-32" htmlFor={key}>{name}:</label>
 							<div className='input-group w-full'>
 								<input name={key} onChange={handleInput} value={value} className="w-full md:w-64" id={key} type={type} placeholder={`Enter ${name}`}/>
-								{error && <span className="text-red-500">{error}</span>}
-								{!error && <span></span>}
+								{error && key != 'password' && <span className="text-red-500">{error}</span>}
+								{!error && key != 'password' && <span></span>}
+								{error && key === 'password' && <span className="flex flex-col">
+									<span className="text-red-500">{error}</span>
+								</span>}
+								{!error && key === 'password' && <span>
+									<span className="w-[5rem] break-normal text-sm">min 9 char,upper,lower,num,special char</span>
+								</span>}
+
 							</div>
 							
 						</div>

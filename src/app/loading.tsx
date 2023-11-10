@@ -1,13 +1,14 @@
 import React from 'react'
+import Loader from '@/components/Loader'
 
-function Loader() {
+function Loading() {
 	return (
 		<div className="flex justify-center items-center w-full h-full">
 			<div>
-				Loading...
+				<Loader message="" />
 			</div>
 		</div>
 	)
 }
 
-export default Loader
+export default Loading

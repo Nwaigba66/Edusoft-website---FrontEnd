@@ -1,11 +1,24 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { logout } from '@/services/auth-slice'
 import listItems from './navigations'
+import { useAppSelector, useAppDispatch } from '@/services/hooks'
 import { Input } from 'postcss'
 
 
 function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
+	const dispatch = useAppDispatch()
+	const { isLoggedIn } = useAppSelector(state=>state.auth)
+	const router = useRouter()
+
+
+	function handleLogout(){
+		props.toggleNav()
+		dispatch(logout())
+		router.push('/')
+	}
 
 	return (
 		<div className={`${props.hide && "hidden"} absolute flex flex-col md:flex-row md:ml-auto
@@ -21,16 +34,21 @@ function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
                 </Link>
               </li>)}
 			</ul>
-			<Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
-										bg-gray-200 p-4 text-black">
-				Login/Logout
-			</Link>
+			{!isLoggedIn && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
+													bg-gray-200 p-4 text-black">
+							Login
+						</Link>}
+
+		{isLoggedIn && <span onClick={handleLogout} className="w-full md:ml-5 cursor-pointer rounded
+								bg-red-300 p-4 text-white">
+		Logout
+	</span>}
+
 		</div>
 		
 
 			 
-			  
-		  
+	
 	)
 }
 

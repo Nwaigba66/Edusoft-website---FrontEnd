@@ -1,7 +1,8 @@
 "use client"
 import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-
+import { useFetchOptionsQuery } from '@/services/api'
+import './sidebar.css'
 
 const initialFormState : {
   [key:string]:string
@@ -15,7 +16,8 @@ export default function SideBar({displaySearch, toggleSidebar}:{
   toggleSidebar:()=>void
 }) {
 
-  const [searchForm, setSearchForm] = useState(initialFormState)
+  const [searchForm, setSearchForm] = useState(initialFormState);
+  const { data, isLoading } = useFetchOptionsQuery();
   const { search, course } = searchForm
   const courseRef = useRef<HTMLSelectElement>(null)
   const countryRef = useRef<HTMLSelectElement>(null)
@@ -41,7 +43,7 @@ export default function SideBar({displaySearch, toggleSidebar}:{
     e.preventDefault()
     const { name,value} = e.target
     setSearchForm(prevState=>({
-      ...prevState,[name]:value.trim()}))
+      ...prevState,[name]:value}))
   }
   
   return (
@@ -60,16 +62,16 @@ export default function SideBar({displaySearch, toggleSidebar}:{
           <h3 >Select a Country</h3>
           <select ref={countryRef} name="country" id="country" className="bg-placeholder h-[45px]">
              <option value="select" >----------</option>
-            <option value="ng" >Nigeria</option>
-            <option value="uk">United Kingdom</option>
+             {!isLoading && data?.countries && data.countries.map(({name, code2})=><option key={code2} value={code2} >
+              {name}</option>)}
           </select>
         </div>
         <div>
            <h3 >Select a Course</h3>
             <select ref={courseRef} onChange={handleInput} disabled={search.length > 0}  name="course" id="course" className="bg-placeholder h-[45px]">
               <option value="select">------------</option>
-              <option value="software">Software Engineering</option>
-              <option value="nursing">Nursing</option>
+              {!isLoading && data?.courses && data.courses.map(({name})=><option key={name.replace(' ', '_')} value={name}>
+                {name}</option>)}
             </select>
         </div>
         
