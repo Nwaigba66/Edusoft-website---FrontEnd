@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login-group{
+	@apply flex flex-col md:flex-row w-full
+}

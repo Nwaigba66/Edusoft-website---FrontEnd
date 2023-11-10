@@ -75,7 +75,7 @@ export default function SideBar({displaySearch, toggleSidebar}:{
             </select>
         </div>
         
-        <button className="bg-button text-white">Submit</button>
+        <button className="bg-button text-white text-lg p-2">Search For Course</button>
       </form>
     </div>
   );

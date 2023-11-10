@@ -158,7 +158,7 @@ function Registration() {
 					})}
 					
 					<div className="flex justify-center">
-						<button className="py-2 px-4 bg-button text-white text-xl rounded">Complete Registration</button>
+						<button type="submit" className="py-2 px-4 bg-button text-white text-xl rounded">Complete Registration</button>
 					</div>
 					<div className="flex justify-center nowrap w-full mb-10">
 						Have an Account? <Link className="text-blue-500" href="/auth/login">Login to  your Account</Link>
