@@ -35,11 +35,11 @@ const initialFormState : {
 		name:"Username",
 		type:"text"
 	},
-	firstname:{
+	first_name:{
 		name:"Firstname",
 		type:"text"
 	},
-	lastname:{
+	last_name:{
 		name:"Lastname",
 		type:"text"
 	},
@@ -51,7 +51,7 @@ const initialFormState : {
 		name:"Password",
 		type:"password"
 	},
-	confirmpassword:{
+	confirm_password:{
 		name:"Confirm Password",
 		type:"password"
 	}
