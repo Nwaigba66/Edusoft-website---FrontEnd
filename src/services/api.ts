@@ -41,7 +41,7 @@ export const apiSlice = createApi({
 					return `/courses/${courseId}`
 				},
 			}),
-			login: builder.multation<LoginResponse, LoginData>({
+			login: builder.mutation<LoginResponse, LoginData>({
 				query: ({username, password}) =>({
 					url: '/token',
 					method: 'POST',
@@ -51,7 +51,7 @@ export const apiSlice = createApi({
 					},
 				}),
 			}),
-			refreshToken: builder.multation<Partial<LoginResponse>, {refresh: string}>({
+			refreshToken: builder.mutation<Partial<LoginResponse>, {refresh: string}>({
 				query: (refresh) =>({
 					url: '/token/refresh',
 					method: 'POST',
