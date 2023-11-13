@@ -81,12 +81,12 @@ function Faq() {
         <h2>
         <button
             className="flex flex-col border-slate-100 text-slate-700 w-full focus:ring-2 rounded-t-1 group relative items-center p-4 transition-all ease-in"
-            data-collapse-target="animated-collapse-2">
+            data-collapse-target="animated-collapse-3">
             <p className='flex flex-col text-xl'>Do you support with document review and CV review ?</p>
             <i className="fa fa-chevron-down relative right-0 pt-2 text-base transition-transform group-open:rotate-180"></i>
         </button>
         </h2>
-        <div data-collapse="animated-collapse-2"
+        <div data-collapse="animated-collapse-3"
             className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
         <div className="p-4 w-full">
             Yes, we provide services for document reviews.   
@@ -98,12 +98,12 @@ function Faq() {
         <h2>
         <button
             className="flex flex-col border-slate-100 text-slate-700 w-full focus:ring-2 rounded-t-1 group relative items-center p-4 transition-all ease-in"
-            data-collapse-target="animated-collapse-2">
+            data-collapse-target="animated-collapse-3">
             <p className='flex flex-col text-xl'>Do you have a physical address ?</p>
             <i className="fa fa-chevron-down relative right-0 pt-2 text-base transition-transform group-open:rotate-180"></i>
         </button>
         </h2>
-        <div data-collapse="animated-collapse-2"
+        <div data-collapse="animated-collapse-3"
             className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
         <div className="p-4 w-full">
             No, we do not have a physical address. However, all our staffs are scattered all over the
@@ -116,15 +116,49 @@ function Faq() {
         <h2>
         <button
             className="flex flex-col border-slate-100 text-slate-700 w-full focus:ring-2 rounded-t-1 group relative items-center p-4 transition-all ease-in"
-            data-collapse-target="animated-collapse-2">
+            data-collapse-target="animated-collapse-4">
             <p className='flex flex-col text-xl'>Do you have information on Tuition fees ?</p>
             <i className="fa fa-chevron-down relative right-0 pt-2 text-base transition-transform group-open:rotate-180"></i>
         </button>
         </h2>
-        <div data-collapse="animated-collapse-2"
+        <div data-collapse="animated-collapse-4"
             className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
         <div className="p-4 w-full">
             Yes, we have information on tuition fees on our website, just select your desired course, university and country.   
+        </div>
+        </div>
+        </div> 
+
+        <div className="flex flex-col justify-between mb-3 mt-5">
+        <h2>
+        <button
+            className="flex flex-col border-slate-100 text-slate-700 w-full focus:ring-2 rounded-t-1 group relative items-center p-4 transition-all ease-in"
+            data-collapse-target="animated-collapse-5">
+            <p className='flex flex-col text-xl'>Do you offer information for all courses ?</p>
+            <i className="fa fa-chevron-down relative right-0 pt-2 text-base transition-transform group-open:rotate-180"></i>
+        </button>
+        </h2>
+        <div data-collapse="animated-collapse-5"
+            className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
+        <div className="p-4 w-full">
+            Yes, we have information on all courses on our website, just select your desired course, university and country.   
+        </div>
+        </div>
+        </div> 
+
+         <div className="flex flex-col justify-between mb-3 mt-5">
+        <h2>
+        <button
+            className="flex flex-col border-slate-100 text-slate-700 w-full focus:ring-2 rounded-t-1 group relative items-center p-4 transition-all ease-in"
+            data-collapse-target="animated-collapse-6">
+            <p className='flex flex-col text-xl'>Do you have information on nursing and caregiver ?</p>
+            <i className="fa fa-chevron-down relative right-0 pt-2 text-base transition-transform group-open:rotate-180"></i>
+        </button>
+        </h2>
+        <div data-collapse="animated-collapse-6"
+            className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
+        <div className="p-4 w-full">
+            No, we have do not have information on nursing and caregivers on our website, just select your desired course, university and country.   
         </div>
         </div>
         </div> 
