@@ -6,17 +6,17 @@ const faqList = [
     {
     name:"Consultation",
     url:'/image/consultations.png',
-    type:'text',
+    description:'Consultations helps you clear any doubts',
 },
 {
     name:"Planning",
     url:'/image/Planning.png',
-    type:'text',
+    description:'Keeps you away from rush hour and saves alot of money ',
 }, 
 {
     name:"Dedication",
     url:'/image/Dedication.png',
-    type:'text',
+    description:'Dedication to your motivation leads to success',
 },
 
 ]
@@ -29,10 +29,12 @@ function Faq() {
             HOW IT WORKS
         </h1> 
         <div className='flex flex-row items-center gap-10 mt-8 justify-center'>
-            {faqList.map(({name,url})=><div className='flex flex-col items-center justify-center gap-10 bg-principles w-[12rem] rounded-2xl p-4' key={name}>
-            {name}
+            {faqList.map(({name,url,description})=><div className='flex flex-col items-center justify-center gap-10 bg-principles w-[12rem] rounded-2xl p-4' key={name}>
+            <div className='flex flex-col-reverse gap-5 justify-center items-center'>
+            <h3>{name}</h3>
             <Image src={url} alt={`image of ${name}`} width={50} height={50} />
-            <h2>Consultations helps you clear any doubts</h2>
+            </div>
+            <h2 className='text-center'>{description}</h2>
         </div>)}
         </div>
         
@@ -52,7 +54,7 @@ function Faq() {
         </button>
         </h2>
         <div data-collapse="animated-collapse"
-            className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            className=" overflow-hidden transition-all duration-300 ease-in-out">
         <div className="p-4 w-full">
             We do not offer information on funding / scholarship.   
         </div>
@@ -69,8 +71,8 @@ function Faq() {
         </button>
         </h2>
         <div data-collapse="animated-collapse-2"
-            className="h-0 overflow-hidden transition-all duration-300 ease-in-out">
-        <div className="p-4 w-full">
+            className=" overflow-hidden transition-all duration-300 ease-in-out">
+        <div className="p-4 w-full text-left">
             Create an account with your personal details, to log-into our website then search for desired course
             and country.   
         </div>
