@@ -10,7 +10,7 @@ import { Input } from 'postcss'
 
 function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
 	const dispatch = useAppDispatch()
-	const { isLoggedIn } = useAppSelector(state=>state.auth)
+	const { username } = useAppSelector(state=>state.auth)
 	const router = useRouter()
 
 
@@ -34,12 +34,12 @@ function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
                 </Link>
               </li>)}
 			</ul>
-			{!isLoggedIn && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
+			{!username && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
 													bg-gray-200 p-4 text-black">
 							Login
 						</Link>}
 
-		{isLoggedIn && <span onClick={handleLogout} className="w-full md:ml-5 cursor-pointer rounded
+		{username && <span onClick={handleLogout} className="w-full md:ml-5 cursor-pointer rounded
 								bg-red-300 p-4 text-white">
 		Logout
 	</span>}

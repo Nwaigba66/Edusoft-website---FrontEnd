@@ -1,10 +1,10 @@
-import { setCookie, getCookie, removeCookie } from 'cookies-next';
+import { setCookie, getCookie, deleteCookie } from 'cookies-next';
+import { LoginResponse } from './api'
 
-
-export const setAppCookie = (key:string, value:string, validity:number)=>{
+export const setAppCookie = (key:string, value: string|number, validity:number)=>{
 	// set cookies identified by a given key with a value and validity 
 	// in milliseconds
-	const encodedValue = Buffer.from(value).toString('base64');
+	const encodedValue = Buffer.from(`${value}`).toString('base64');
 
 	setCookie(key, encodedValue,{
 		maxAge:validity,
@@ -21,25 +21,44 @@ export const getAppCookie = (key:string) =>{
 }
 
 export const cookieKeys: string[] = [
-	'accessToken', 'refreshToken',
-	'accessTokenValidity', 'refreshTokenValidity'
+	'access', 'refresh', 'email', 'username',
+	'access_expires_seconds', 'refresh_expires_seconds'
 	]
 
 
 export const doLogout = () =>{
-	for (const key in cookieKeys){
-		removeCookie(key);
+	for (const key of cookieKeys){
+		deleteCookie(key);
 	}
 }
 
-export const isAccessExpired = ()=>{
-	const validity = getAppCookie('accessTokenValidity') || 1;
+export function getInitialData(){
 
-	return (new Date().getTime()) > validity;
+	// get the initial data from cookie
+	const initialData:{
+		[key:string]:string|number
+	} = {};
+	for (const key of cookieKeys ){
+		if (key.endsWith('seconds')){
+			const value = getAppCookie(key) || "";
+			initialData[key] = value? +value : value;
+		}
+		else{
+			const value = getAppCookie(key) || "";
+			initialData[key] = value;
+		}
+	}
+	return initialData
+}
+
+export const isAccessExpired = ()=>{
+	const validity = getAppCookie('access_expires_seconds') || 1;
+
+	return (new Date().getTime()) > +validity;
 }
 
 export const isRefreshExpired = () =>{
-	const validity = getAppCookie('refreshTokenValidity') || 1;
+	const validity = getAppCookie('refresh_expires_seconds') || 1;
 
-	return (new Date().getTime()) > validity;
+	return (new Date().getTime()) > +validity;
 }

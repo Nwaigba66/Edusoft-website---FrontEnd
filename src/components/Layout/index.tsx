@@ -7,8 +7,9 @@ import MenuOpen from '@/components/Icons/MenuOpen'
 import ManageSearchIcon from '@/components/Icons/ManageSearchIcon'
 import { Provider } from 'react-redux';
 import { store } from '@/services/store';
-import { useAppSelector } from '@/services/hooks';
-import { logout } from '@/services/auth-slice';
+import { useAppSelector, useAppDispatch } from '@/services/hooks';
+import { logout, updateState } from '@/services/auth-slice';
+import { getInitialData } from '@/services'
 // import { authSlice } from '@/services/auth-slice'
 
 
@@ -30,45 +31,55 @@ export const  StoreProvider = (props:{children:React.ReactNode})=>{
 
 function Layout({children,}:{children: React.ReactNode}) {
 	const [displaySearch, setDisplaySearch] = useState(false)
-	const { access_expiry_seconds:accessTimeOut } = useAppSelector(state=>state.auth);
-	
-	const milliSecondsToTrigger = accessTimeOut? +accessTimeOut -  (new Date().toTime()) : accessTimeOut; 
-	
-	let logoutTimer;
+	const [isLogin, setIsLogin] = useState(false)
+	const { access_expires_seconds:accessTimeOut } = useAppSelector(state=>state.auth);
+	const dispatch = useAppDispatch()
+	const milliSecondsToTrigger = accessTimeOut? +accessTimeOut -  (new Date().getTime()/1000) : accessTimeOut; 
+	const abortSignal = useRef(new AbortController());
+	const logoutTimer = useRef(undefined);
 
-	const handleLogoutTimer = useCallback(
-		() => {
-			logoutTimer = setTimeout(()=>{
-				resetTimer();
-				event.forEach(event=>{
-					window.removeEventListener(event, resetTimer);
-				});
-				logout()
-			})
-		},[milliSecondsToTrigger])
 
-	const resetTimer = useCallback(()=>{
-		if (logoutTimer) clearTimeout(logoutTimer);
-	}, [logoutTimer])
 
 	const toggleSidebar = () =>{
 		setDisplaySearch(prevState=>!prevState)
 	}
 
+	const logoutTrigger = useCallback(()=>{
+		if (logoutTimer.current) clearTimeout(logoutTimer.current);
+		logoutTimer.current = setTimeout(()=>{
+			dispatch(logout());
+			clearTimeout(logoutTimer.current)
+		}, milliSecondsToTrigger)
+	}, [milliSecondsToTrigger, dispatch])
+
 	useEffect(()=>{
-		if (!milliSecondsToTrigger){
-			console.log("user not logged in")
-			return
-		}
-
-		event.forEach(event=>{
-			window.addEventListener(event, ()=>{
-				resetTimer();
-				handleLogoutTimer();
-			})
+		// manage the access time for login user
+		if (accessTimeOut && !isLogin){
+			setIsLogin(true);
+			events.forEach(event=>{
+			document.addEventListener(event,logoutTrigger, {signal:abortSignal.current.signal});
 		});
-	}, [milliSecondsToTrigger, handleLogoutTimer, resetTimer])
+			if (logoutTimer.current) clearTimeout(logoutTimer.current);
+			logoutTimer.current = setTimeout(()=>{
+				dispatch(logout());
+				clearTimeout(logoutTimer.current);
+			}, milliSecondsToTrigger)
+		}
+		else if (!accessTimeOut && isLogin){
+			setIsLogin(false);
+			abortSignal.current.abort()
+		}	
+	}, [accessTimeOut, milliSecondsToTrigger, logoutTrigger, isLogin, dispatch]);
 
+
+	useEffect(()=>{
+		// manage user session by fetching user credentials from cookies
+		(async ()=>{
+			const initialData = getInitialData();
+			await dispatch(updateState(initialData));
+		})();
+
+	}, [dispatch])
 	return (
 		<main className="main-container">
 			<Header />

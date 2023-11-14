@@ -19,7 +19,6 @@ function SearchPage() {
 	const query = `${search?"search="+search:""}
 	${country?"&country="+ country:""}${course?"&course="+ course:""}`
 	const { data, isLoading } = useFetchCoursesQuery(query)
-	console.log(data)
 
 	return (
 		<div className="search-page">

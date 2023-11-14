@@ -2,15 +2,15 @@ import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Courses, FilterOptions, TypeCoursesDetail } from '@/components/types';
 import { baseUrl } from '@/components/urls'
 
-interface LoginResponse {
+export interface LoginResponse {
 	first_name:string;
 	last_name:string;
 	email:string;
 	username:string;
 	access:string;
 	refresh:string;
-	access_expiry_seconds:number;
-	refresh_expirty_seconds:number;
+	access_expires_seconds:number;
+	refresh_expires_seconds:number;
 }
 
 
@@ -42,18 +42,18 @@ export const apiSlice = createApi({
 				},
 			}),
 			login: builder.mutation<LoginResponse, LoginData>({
-				query: ({username, password}) =>({
-					url: '/token',
+				query: ({email, password}) =>({
+					url: '/token/',
 					method: 'POST',
 					body:{
-						username,
+						email,
 						password
 					},
 				}),
 			}),
 			refreshToken: builder.mutation<Partial<LoginResponse>, {refresh: string}>({
 				query: (refresh) =>({
-					url: '/token/refresh',
+					url: '/token/refresh/',
 					method: 'POST',
 					body:{
 						refresh,
