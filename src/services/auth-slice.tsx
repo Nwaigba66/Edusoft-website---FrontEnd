@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { apiSlice } from '@/services/api'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { LoginResponse } from '@/services/api';
+import { doLogout, setAppCookie, getAppCookie } from '@/services'
 
 type TypeCredential = {
 	username:string;
@@ -12,36 +15,70 @@ type TypeLogin = {
 	password:string;
 }
 
-const initialState = {
-	username:"",
-	isLoggedIn:false,
-	email:"",
-	password:""
-}
+const initialState: Partial<LoginResponse> = {}
+
+
 
 export const authSlice = createSlice({
 	name:"auth",
 	initialState,
 	reducers:{
-		login (state, action: PayloadAction<TypeLogin>) {
-			
-			if (state.email === action.payload.email && state.password === action.payload.password){
-				state.isLoggedIn=true;
-			}
+		logout (){
+			doLogout(); // clear the caches
+			return {};
 		},
-		logout (state) {
-			state.username = "";
-			state.email="";
-			state.password="";
-			state.isLoggedIn=false;
+		updateState (state, {payload}){
+			return payload;
 		},
-		register (state, action: PayloadAction<TypeCredential>){
-			state.username = action.payload.username;
-			state.email=action.payload.email;
-			state.password=action.payload.password;
+	},
+	extraReducers: (builder) =>{
+			builder
+				.addMatcher(
+					apiSlice.endpoints.login.matchFulfilled,
+					(state, { payload }) =>{
+						const {
+							username, access_expires_seconds, email,
+							refresh_expires_seconds, access, refresh } = payload;
+						// update state from login response
+						// state.username=username;
+						// state.access = access;
+						// state.refesh = refresh;
+						// state.access_expiry_seconds = access_expiry_seconds;
+						// state.refresh_expiry_seconds = refresh_expiry_seconds;
+
+						setAppCookie("access", access, access_expires_seconds/1000);
+						setAppCookie("refresh",refresh, refresh_expires_seconds/1000);
+						setAppCookie("access_expires_seconds", access_expires_seconds,access_expires_seconds/1000);
+						setAppCookie("refresh_expires_seconds", refresh_expires_seconds,refresh_expires_seconds/1000);
+						setAppCookie('username', username,refresh_expires_seconds/1000)
+						setAppCookie('email', email,refresh_expires_seconds/1000)
+						return payload;
+					}
+				)
+				.addMatcher(
+					apiSlice.endpoints.refreshToken.matchFulfilled,
+					(state, { payload }) =>{
+						// update access token recieved from the request
+						// console.log(payload)
+						if (payload.access){
+							// update the cookies
+							const access_expires_seconds = new Date().getTime() + 295000;
+							setAppCookie("access", payload.access, access_expires_seconds/1000);
+
+							setAppCookie('access_expires_seconds',access_expires_seconds, access_expires_seconds/1000)
+
+
+
+							return {
+								...state,
+								access:payload.access,
+								access_expires_seconds:access_expires_seconds,
+							}
+						}
+					}
+				)
 		}
-	}
 })
 
-export const { login, logout, register } = authSlice.actions
+export const {logout, updateState } = authSlice.actions
 export default authSlice.reducer

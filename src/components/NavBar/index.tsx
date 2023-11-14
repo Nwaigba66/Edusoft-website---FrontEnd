@@ -6,11 +6,12 @@ import { logout } from '@/services/auth-slice'
 import listItems from './navigations'
 import { useAppSelector, useAppDispatch } from '@/services/hooks'
 import { Input } from 'postcss'
+import PersonIcon from '@/components/Icons/PersonIcon'
 
 
 function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
 	const dispatch = useAppDispatch()
-	const { isLoggedIn } = useAppSelector(state=>state.auth)
+	const { username } = useAppSelector(state=>state.auth)
 	const router = useRouter()
 
 
@@ -34,20 +35,25 @@ function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
                 </Link>
               </li>)}
 			</ul>
-			{!isLoggedIn && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
+			{!username && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
 													bg-gray-200 p-4 text-black">
 							Login
 						</Link>}
 
-		{isLoggedIn && <span onClick={handleLogout} className="w-full md:ml-5 cursor-pointer rounded
+			{username && <div className="flex justify-around bg-gray-400 md:mx-2 md:bg-transparent">
+				<span className="flex w-[5rem] text-black text-sm flex-col-reverse
+												justify-center items-center bg-gray-100 rounded ">
+					{username}
+					<PersonIcon color="blue" />
+				</span>
+				<span onClick={handleLogout} className="md:ml-5 cursor-pointer rounded
 								bg-red-300 p-4 text-white">
-		Logout
-	</span>}
+					Logout
+				</span>
+			</div>}
 
 		</div>
-		
-
-			 
+	 
 	
 	)
 }

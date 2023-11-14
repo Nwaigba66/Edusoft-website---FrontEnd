@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Layout from '@/components/Layout'
+import Layout, { StoreProvider } from '@/components/Layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,9 +16,11 @@ export default async function RootLayout(props: {
   return (
     <html lang="en">
       <body>
-        <Layout>
-          {props.children}
-        </Layout>
+        <StoreProvider>
+          <Layout>
+            {props.children}
+          </Layout>
+        </StoreProvider>
       </body>
     </html>
   )

@@ -2,6 +2,22 @@ import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Courses, FilterOptions, TypeCoursesDetail } from '@/components/types';
 import { baseUrl } from '@/components/urls'
 
+export interface LoginResponse {
+	first_name:string;
+	last_name:string;
+	email:string;
+	username:string;
+	access:string;
+	refresh:string;
+	access_expires_seconds:number;
+	refresh_expires_seconds:number;
+}
+
+
+interface LoginData {
+	email:string;
+	password:string;
+}
 
 export const apiSlice = createApi({
 	reducerPath:'api',
@@ -25,11 +41,43 @@ export const apiSlice = createApi({
 					return `/courses/${courseId}`
 				},
 			}),
+			login: builder.mutation<LoginResponse, LoginData>({
+				query: ({email, password}) =>({
+					url: '/token/',
+					method: 'POST',
+					body:{
+						email,
+						password
+					},
+				}),
+			}),
+			refreshToken: builder.mutation<Partial<LoginResponse>, string>({
+				query: (refresh) =>({
+					url: '/token/refresh/',
+					method: 'POST',
+					body:{
+						refresh: refresh,
+					},
+				}),
+			}),
+			getAuthenticationData: builder.query<Partial<LoginResponse>, string>({
+				query: (accessToken) =>({
+					url: '/user',
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${accessToken}`
+					},
+				}),
+			}),
 		}
 	},
 });
 
+
 export const {
+	useGetAuthenticationDataQuery,
+	useRefreshTokenMutation,
+	useLoginMutation,
 	useFetchCoursesQuery,
 	useFetchOptionsQuery,
 	useFetchCourseDetailQuery } = apiSlice;
