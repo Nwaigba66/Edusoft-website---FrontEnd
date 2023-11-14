@@ -51,12 +51,12 @@ export const apiSlice = createApi({
 					},
 				}),
 			}),
-			refreshToken: builder.mutation<Partial<LoginResponse>, {refresh: string}>({
+			refreshToken: builder.mutation<Partial<LoginResponse>, string>({
 				query: (refresh) =>({
 					url: '/token/refresh/',
 					method: 'POST',
 					body:{
-						refresh,
+						refresh: refresh,
 					},
 				}),
 			}),

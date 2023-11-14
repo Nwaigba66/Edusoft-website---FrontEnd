@@ -48,7 +48,7 @@ export const authSlice = createSlice({
 
 						setAppCookie("access", access, access_expires_seconds/1000);
 						setAppCookie("refresh",refresh, refresh_expires_seconds/1000);
-						setAppCookie("access_expires_seconds", refresh_expires_seconds,refresh_expires_seconds/1000);
+						setAppCookie("access_expires_seconds", access_expires_seconds,access_expires_seconds/1000);
 						setAppCookie("refresh_expires_seconds", refresh_expires_seconds,refresh_expires_seconds/1000);
 						setAppCookie('username', username,refresh_expires_seconds/1000)
 						setAppCookie('email', email,refresh_expires_seconds/1000)
@@ -59,15 +59,22 @@ export const authSlice = createSlice({
 					apiSlice.endpoints.refreshToken.matchFulfilled,
 					(state, { payload }) =>{
 						// update access token recieved from the request
+						// console.log(payload)
 						if (payload.access){
-							state.access = payload.access;
-
 							// update the cookies
-							const accessValidity = getAppCookie("access_expires_seconds") || 5 * 60;
-							setAppCookie("access", payload.access, +accessValidity);
+							const access_expires_seconds = new Date().getTime() + 295000;
+							setAppCookie("access", payload.access, access_expires_seconds/1000);
+
+							setAppCookie('access_expires_seconds',access_expires_seconds, access_expires_seconds/1000)
+
+
+
+							return {
+								...state,
+								access:payload.access,
+								access_expires_seconds:access_expires_seconds,
+							}
 						}
-						
-						
 					}
 				)
 		}

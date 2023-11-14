@@ -48,7 +48,7 @@ function Login() {
 					email:"",
 				}));
 			
-			let timeOut;
+			let timeOut:ReturnType<typeof setTimeout>;
 			 timeOut= setTimeout(()=>{
 				setLoginData(prevState=>({
 					...prevState,
