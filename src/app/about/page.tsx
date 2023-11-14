@@ -83,7 +83,6 @@ function About() {
 
 
     </div>
-      
      
   )
 }

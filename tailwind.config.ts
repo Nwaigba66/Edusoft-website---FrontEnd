@@ -23,7 +23,7 @@ const config: Config = {
         'button': '#2b8f41',
         'principles': '#F7F7FA',
         'booking': '#E9D6EE',
-      }
+      },
     },
   },
   plugins: [],
