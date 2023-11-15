@@ -2,6 +2,8 @@ import { url } from 'inspector'
 import React from 'react'
 import Image from 'next/image'
 
+
+// array of objects representing a description of each principles
 const principlesList = [
   {
     name:"Open-mindness",
@@ -28,11 +30,13 @@ const principlesList = [
     url: '/image/Openess.png',
   },
 ]
+
+
 function About() {
- 
+ // About page
   return (
    
-    <div className='flex flex-col justify-around items-center mt-6 ml-6'>
+    <div className='flex flex-col justify-around items-center mt-6 w-full'>
       <h1 className='ml-6 justify-center items-center text-2xl'>ABOUT STATEMENT
       </h1>
 
@@ -41,7 +45,7 @@ function About() {
         </h1>
       </div>
 
-      <div className='border-b-2 w-full border-black'>
+      <div className='border-b-2 border-black'>
         <h1 className='justify-center mb-8 font-light mt-6 tracking-normal'>Edusoft is an educational 
         platform that is launched in the November 2023. We are leading organisation in the provision 
         of information for university application and processes. Our platform allows students search for their
@@ -72,8 +76,8 @@ function About() {
       </h1>
       </div>
 
-      <div className='flex flex-row justify-around mt-6 mb-14 items-center gap-4'>
-        {principlesList.map(({name,url})=><div className='flex flex-col-reverse bg-principles w-[10rem] gap-16 rounded-2xl items-center justify-around p-4' key={name}>
+      <div className='flex flex-row flex-wrap justify-around mt-6 mb-14 items-center gap-4'>
+        {principlesList.map(({name,url})=><div className='flex flex-col-reverse bg-principles w-[8rem] gap-16 rounded-2xl items-center justify-around p-2' key={name}>
           {name}
           <Image src={url} alt={`image of ${name}`} width={50} height={50} />
 

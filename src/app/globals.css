@@ -27,32 +27,17 @@ body {
   @apply bg-white w-full h-full;
   grid-template-rows: auto 1fr auto;
 }
-.foot{
-}
+
 .head{
   height: var(--header-height);
-  @apply sticky top-0;
+  @apply sticky top-0 !important;
 }
 
-.sidebar{
-  top: var(--header-height);
-  max-height: calc(100vh - 10rem);
-}
 .maincontent{
   display:grid;
   grid-template-columns: 1fr auto;
   min-height: calc(100vh - var(--header-height));
 
-}
-.sidebar section input, 
-.sidebar section select,
-.sidebar section button
-{
-  @apply w-[13rem] min-h-[2rem] rounded;
-}
-
-.sidebar section div h3 {
-  @apply text-center;
 }
 
 .below-header{
@@ -66,15 +51,19 @@ body {
 .registration-form select{
   @apply border-solid border-2 h-[3rem] rounded text-center shadow;
 }
-.consultation-form label{
-  @apply text-xl;
-}
-.consultation-form input{
-  @apply border-solid border-2 h-[3rem] rounded text-center shadow;
-}
+
 .form-group{
   display: grid;
   grid-template-columns: 1fr 2fr;
   @apply bg-red-300;
+}
+
+.input-group{
+  display:grid;
+  grid-template-rows: 2fr 1fr;
+  @apply flex flex-col justify-center;
+}
+.input-group span{
+  @apply h-2 text-sm;
 }
 

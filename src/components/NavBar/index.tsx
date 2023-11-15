@@ -1,11 +1,27 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { logout } from '@/services/auth-slice'
 import listItems from './navigations'
+import { useAppSelector, useAppDispatch } from '@/services/hooks'
 import { Input } from 'postcss'
+import PersonIcon from '@/components/Icons/PersonIcon'
 
 
 function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
+	// Define the visuals and logic of  the navigation bar of the app
+	const dispatch = useAppDispatch()
+	const { username } = useAppSelector(state=>state.auth)
+	const router = useRouter()	// required for switching pages
+
+
+	function handleLogout(){
+		// control logout process when the logout button is clicked
+		props.toggleNav()
+		dispatch(logout())
+		router.push('/')
+	}
 
 	return (
 		<div className={`${props.hide && "hidden"} absolute flex flex-col md:flex-row md:ml-auto
@@ -21,16 +37,26 @@ function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
                 </Link>
               </li>)}
 			</ul>
-			<Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
-										bg-gray-200 p-4 text-black">
-				Login/Logout
-			</Link>
-		</div>
-		
+			{!username && <Link href="/auth/login" onClick={()=>props.toggleNav()} className="w-full md:ml-5 cursor-pointer rounded
+													bg-gray-200 p-4 text-black">
+							Login
+						</Link>}
 
-			 
-			  
-		  
+			{username && <div className="flex justify-around bg-gray-400 md:mx-2 md:bg-transparent">
+				<span className="flex w-[5rem] text-black text-sm flex-col-reverse
+												justify-center items-center bg-gray-100 rounded ">
+					{username}
+					<PersonIcon color="blue" />
+				</span>
+				<span onClick={handleLogout} className="md:ml-5 cursor-pointer rounded
+								bg-red-300 p-4 text-white">
+					Logout
+				</span>
+			</div>}
+
+		</div>
+	 
+	
 	)
 }
 
