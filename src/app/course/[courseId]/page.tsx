@@ -6,10 +6,15 @@ import { useFetchCourseDetailQuery } from '@/services/api'
 import './course.css'
 
 function Course() {
-	const router = useRouter()
-	const {courseId} = useParams<{courseId:string}>();
+	// definition of an individual course page
+
+	const router = useRouter()	// required for switching pages
+	const {courseId} = useParams<{courseId:string}>();  // collect the courseId from the url
 	
+	// get the details of the course with a given courseId
 	const { data, isLoading } = useFetchCourseDetailQuery(courseId)
+
+	
 	return (
 		<div className="course-detail">
 			<h2 className="flex items-center border-b-2 justify-center text-2xl min-h-[5rem]">

@@ -64,22 +64,25 @@ const initialValues :{
 } = {}
 
 
+// Set default values for each field in the registration from
 Object.keys(initialFormState).forEach(val=>{
 	initialValues[val] = {value:"", error:""}
 })
 
 
 function Registration() {
+	// define logic for Registration
 	const [formValues, setFormValue] = useState(initialValues)
-	const {username } = useAppSelector(state=>state.auth)
-	const dispatch = useAppDispatch()
-	const router = useRouter()
+	const {username } = useAppSelector(state=>state.auth)  // grab the username from redux managed state
+	const dispatch = useAppDispatch()	// for disptching redux actions
+	const router = useRouter()	// required for page switching
 
 
 	function handleInput(e: React.ChangeEvent<HTMLInputElement>){
 		// handle the input for each fields
-		const {value, name} = e.target
+		const {value, name} = e.target // extract value and name from the input element
 
+		// update form value
 		setFormValue(prevState=>({
 			...prevState,
 			[name]:{...prevState[name], error:"", value:value.trim()}
@@ -87,7 +90,10 @@ function Registration() {
 	}
 
 	function handleSubmit(e:React.FormEvent){
-		e.preventDefault();
+		// controls what happend when form is submitted
+
+		e.preventDefault();  // prevent default form handling 
+		
 		let isValid = false;
 		setFormValue(prevState=>{
 			const copyState = {...prevState}
@@ -108,23 +114,7 @@ function Registration() {
 			}
 			return copyState
 			})
-
-		if (isValid){
-			// dispatch(register({username:formValues.username.value, 
-			// 	email:formValues.email.value,
-			// 	password:formValues.password.value}))
-			// setFormValue(initialValues);
-			// router.push('/auth/login')
-
-		}
 		
-
-	}
-	if (username){
-		return <div className="flex flex-col justify-center items-center">
-				<div className="text-xl text">Signed in as {username}</div>
-			<button className="inline-block bg-green-400 text-white p-4" onClick={()=>router.push('/')}>Back to Home Page</button>
-		</div>
 	}
 
 	return (

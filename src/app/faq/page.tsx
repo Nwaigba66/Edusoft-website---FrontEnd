@@ -8,17 +8,17 @@ const faqTopDisplayList = [
     {
     name:"Consultation",
     url:'/image/consultations.png',
-    type:'text',
+    description:'Consultations helps you clear any doubts',
 },
 {
     name:"Planning",
     url:'/image/Planning.png',
-    type:'text',
+    description:'Keeps you away from rush hour and saves alot of money ',
 }, 
 {
     name:"Dedication",
     url:'/image/Dedication.png',
-    type:'text',
+    description:'Dedication to your motivation leads to success',
 },
 
 ]
@@ -70,10 +70,12 @@ function Faq() {
             HOW IT WORKS
         </h1> 
         <div className='flex flex-wrap justify-center gap-5 mt-5'>
-            {faqTopDisplayList.map(({name,url})=><div className='flex flex-col items-center justify-center bg-principles w-[12rem] rounded-2xl p-4' key={name}>
-            {name}
-            <Image src={url} alt={`image of ${name}`} width={50} height={50} />
-            <h2>Consultations helps you clear any doubts</h2>
+            {faqTopDisplayList.map(({name,url, description})=><div className='flex flex-col items-center justify-center bg-principles w-[12rem] gap-3 rounded-2xl p-4' key={name}>
+             <div className='flex flex-col-reverse gap-2 justify-center items-center'>
+                 <h2 className="text-xl">{name}</h2>
+                    <Image src={url} alt={`image of ${name}`} width={50} height={50} />
+             </div>
+            <p className="text-center">{description}</p>
         </div>)}
         </div>
         
@@ -82,25 +84,20 @@ function Faq() {
             <h2 className='flex flex-col items-center justify-center mt-10 ml-10 text-2xl'>Frequently Asked Questions</h2>
         </div>
 
-       
-
-
+        {/* Display list of frequently asked questions and answers*/}
 
         <section>
             {faqList.map(({question, answer, id})=><div key={id} className="relative mb-3">
                   <h6 className="mb-0">
-                    <button
-                      className="border-slate-100 text-slate-700 rounded-t-1 group relative flex w-full cursor-pointer items-center border-b border-solid p-4 text-left font-semibold text-dark-500 transition-all ease-in"
-                      data-collapse-target={`collapse-${id}`}
+                    <label htmlFor={`collapse-${id}`}
+                      className="collape-label border-slate-100 text-slate-700 rounded-t-1 group relative flex w-full cursor-pointer items-center border-b border-solid p-4 text-left font-semibold text-dark-500 transition-all ease-in"
                     >
                       <span>{question}</span>
-                      <i className="fa fa-plus absolute right-0 pt-1 text-xs group-open:opacity-0"></i>
-                      <i className="fa fa-minus absolute right-0 pt-1 text-xs opacity-0 group-open:opacity-100"></i>
-                    </button>
+                    </label>
                   </h6>
+                  <input className="faq-toggler hidden" type="checkbox" name="" id={`collapse-${id}`} />
                   <div
-                    data-collapse={`collapse-${id}`}
-                    className="h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                    className="collapse-item h-0  overflow-hidden transition-all duration-300 ease-in-out"
                   >
                     <div className="p-4 text-sm leading-normal text-blue-gray-500/80">
                       {answer}

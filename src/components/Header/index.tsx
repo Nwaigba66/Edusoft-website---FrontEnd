@@ -7,9 +7,14 @@ import MenuIcon from '@/components/Icons/MenuIcon'
 import CloseIcon from '@/components/Icons/CloseIcon'
 
 function Header() {
-	const [hideMenu, setHideMenu] = useState(true)
+	// Represents the app Header component
+
+	const [hideMenu, setHideMenu] = useState(true) // controls the navigation for smaller screens
 	const router = useRouter()
+
+
 	const toggleNav = ()=>{
+		// toggles the display of navbar for smaller screen
 		setHideMenu(prevState=>!prevState)
 	}
 
@@ -28,11 +33,11 @@ function Header() {
 			</button>
 			<h1 className="ml-3 hidden text-3xl md:flex">Edusoft</h1>
 			<NavBar hide={hideMenu} toggleNav={toggleNav} />
-			<div onClick={()=>setHideMenu(prevState=>!prevState)} className="md:hidden
+			<button type="button" onClick={()=>setHideMenu(prevState=>!prevState)} className="md:hidden
 																	ml-auto p-4 cursor-pointer">
 				{hideMenu && <MenuIcon color="white" />}
 				{!hideMenu && <CloseIcon color="white" />}
-			</div>
+			</button>
 		</header>
 	)
 }

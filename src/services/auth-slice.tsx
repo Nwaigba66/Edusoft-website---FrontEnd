@@ -25,7 +25,7 @@ export const authSlice = createSlice({
 	reducers:{
 		logout (){
 			doLogout(); // clear the caches
-			return {};
+			return {};	// clear the state data
 		},
 		updateState (state, {payload}){
 			return payload;
@@ -39,13 +39,8 @@ export const authSlice = createSlice({
 						const {
 							username, access_expires_seconds, email,
 							refresh_expires_seconds, access, refresh } = payload;
-						// update state from login response
-						// state.username=username;
-						// state.access = access;
-						// state.refesh = refresh;
-						// state.access_expiry_seconds = access_expiry_seconds;
-						// state.refresh_expiry_seconds = refresh_expiry_seconds;
 
+						// set respective cookies
 						setAppCookie("access", access, access_expires_seconds/1000);
 						setAppCookie("refresh",refresh, refresh_expires_seconds/1000);
 						setAppCookie("access_expires_seconds", access_expires_seconds,access_expires_seconds/1000);
@@ -67,8 +62,7 @@ export const authSlice = createSlice({
 
 							setAppCookie('access_expires_seconds',access_expires_seconds, access_expires_seconds/1000)
 
-
-
+							// update the state
 							return {
 								...state,
 								access:payload.access,

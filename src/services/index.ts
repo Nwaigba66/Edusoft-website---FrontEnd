@@ -27,14 +27,14 @@ export const cookieKeys: string[] = [
 
 
 export const doLogout = () =>{
+	// delete all caches for logout
 	for (const key of cookieKeys){
 		deleteCookie(key);
 	}
 }
 
 export function getInitialData(){
-
-	// get the initial data from cookie
+	// get the initial data from cookie if anyone exist
 	const initialData:{
 		[key:string]:string|number
 	} = {};
@@ -52,13 +52,15 @@ export function getInitialData(){
 }
 
 export const isAccessExpired = ()=>{
+	// check if the access token validity period has passed
+	
 	const validity = getAppCookie('access_expires_seconds') || 1;
-
 	return (new Date().getTime()) > +validity;
 }
 
 export const isRefreshExpired = () =>{
-	const validity = getAppCookie('refresh_expires_seconds') || 1;
+	// check if the refresh token validity period has passed
 
+	const validity = getAppCookie('refresh_expires_seconds') || 1;
 	return (new Date().getTime()) > +validity;
 }

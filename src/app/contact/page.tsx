@@ -3,6 +3,7 @@ import Image
  from 'next/image'
 
 function Contact() {
+  // Define the contact page
   return (
     <>
       <div className='flex flex-col justify-around items-center mt-6 ml-10'>
