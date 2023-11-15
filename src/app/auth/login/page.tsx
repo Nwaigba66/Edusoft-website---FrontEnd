@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation'
 import { emailValidator } from '@/components/validators'
 import './login.css'
 
+
+// Default initial values of form elements
 const initalLoginData = {
 	email:"",
 	password:"",
@@ -15,17 +17,22 @@ const initalLoginData = {
 	message:"",
 }
 
+
 function Login() {
-	const router = useRouter()
-	const dispatch = useAppDispatch()
+	// Define the login logic
+
+	const router = useRouter()  // required for switching page
+	const dispatch = useAppDispatch()	// for dispatching redux actions
 	const { email, username } = useAppSelector(state=>state.auth)
 	const [doLogin, {error:errorResponse, isSuccess, data, isLoading}] = useLoginMutation()
 	const [loginData, setLoginData] = useState(initalLoginData)
 	
 	function handleLogin(e:React.FormEvent){
-		e.preventDefault();
+		// handle the login form submission
 
-		if (!loginData.email || !loginData.password) return;
+		e.preventDefault(); // prevent default state of the submission form so as to handle it manually
+		
+		if (!loginData.email || !loginData.password) return;  // stop execution if either email or password is not provided
 
 		// validate the email
 		const emailCheck = emailValidator(loginData.email);
@@ -36,68 +43,51 @@ function Login() {
 			}));
 			return;
 		}
-		const {error, ...credentials} = loginData;
+
+		const {error, ...credentials} = loginData;  // extract only the email and password from form data
 		doLogin(credentials)
 		.unwrap()
-		.then(fullfulled=>{
+		.then(fullfulled=>{	// login was successfull
 			setLoginData(prevState=>({
 					...prevState,
-					message:"Login Successfull",
+					message:"Login Successfull", // show success message
 					error:"",
 					password:"",
 					email:"",
 				}));
 			
-			let timeOut:ReturnType<typeof setTimeout>;
+			let timeOut:ReturnType<typeof setTimeout>;  // control time of success login message display
 			 timeOut= setTimeout(()=>{
 				setLoginData(prevState=>({
 					...prevState,
 					message:""
 				}));
 				clearTimeout(timeOut);
-				router.push('/')
+				router.push('/')  // redirect to home page after success full login
 			},2000);
 		})
-		.catch(rejected=>{
+		.catch(rejected=>{  // the login failed
 			const {data} = rejected;
 			setLoginData(prevState=>({
 					...prevState,
-					error:data?.detail || "An Error has Occured"
+					error:data?.detail || "An Error has Occured" // set error message
 				}));
 		});
-		// if (isSuccess){
-		// 	setLoginData(initalLoginData);
-		// 	router.push('/')
-		// }
-
-		// .unwrap().then(fulfilled=>{
-		// 	console.log(fulfilled);
-		// })
-		// .catch(rejected=>{
-		// 	console.log(rejected);
-		// 	setLoginData(prevState=>({
-		// 		...prevState,
-		// 		error:"Unable to Authenticate"
-		// 	}));
-		// })
 
 	}
 
+	/*
+		handleInput: process user input
+	*/
 	function handleInput(e:React.ChangeEvent<HTMLInputElement>){
 		const {name, value } = e.target;
 		setLoginData(prevState=>({
 			...prevState,
-			[name]:value.trim(),
-			error:""
+			[name]:value.trim(), // collect value and remove excess spaces
+			error:""  // reset any error that could have been displayed earlier on
 		}))
 	}
 
-	// if (email && (typeof window !== 'undefined')){
-	// 	return <div className="flex flex-col justify-center items-center">
-	// 			<div className="text-xl text">Signed in as {username}</div>
-	// 		<button className="inline-block bg-green-400 text-white p-4" onClick={()=>router.push('/')}>Back to Home Page</button>
-	// 	</div>
-	// }
 	return (
 		<div className="flex flex-row items-center">
 			<div className="hidden lg:flex">

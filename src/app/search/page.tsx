@@ -9,15 +9,21 @@ import './search.css';
 
 
 function SearchPage() {
+	// Define the search page
+	
 	const router = useRouter()
 	const params = useParams()
-	const queries = useSearchParams()
-	const country = queries.get('country')
-	const search = queries.get('search')
-	const course = queries.get('course')
+	const queries = useSearchParams()  // collect query parameters from the url
+	const country = queries.get('country') // get the country query
+	const search = queries.get('search')	// get the search query 
+	const course = queries.get('course')	// get the course query
 
+	// reformat the query parameters into appropriate url
 	const query = `${search?"search="+search:""}
-	${country?"&country="+ country:""}${course?"&course="+ course:""}`
+			${country?"&country="+ country:""}${course?"&course="+ course:""}`
+
+	// send a get request to the backend to get courses that matches
+	// the formated queries
 	const { data, isLoading } = useFetchCoursesQuery(query)
 
 	return (

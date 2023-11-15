@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*control the display of accordion*/
+.faq-toggler:checked ~ .collapse-item{
+	@apply h-auto;
+}

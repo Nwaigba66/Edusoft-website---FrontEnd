@@ -2,6 +2,8 @@ import { url } from 'inspector'
 import React from 'react'
 import Image from 'next/image'
 
+
+// array of objects representing a description of each principles
 const principlesList = [
   {
     name:"Open-mindness",
@@ -28,8 +30,10 @@ const principlesList = [
     url: '/image/Openess.png',
   },
 ]
+
+
 function About() {
- 
+ // About page
   return (
    
     <div className='flex flex-col justify-around items-center mt-6 w-full'>

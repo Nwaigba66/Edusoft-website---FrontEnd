@@ -10,12 +10,14 @@ import PersonIcon from '@/components/Icons/PersonIcon'
 
 
 function NavBar(props:{hide:boolean, toggleNav:()=>void}) {
+	// Define the visuals and logic of  the navigation bar of the app
 	const dispatch = useAppDispatch()
 	const { username } = useAppSelector(state=>state.auth)
-	const router = useRouter()
+	const router = useRouter()	// required for switching pages
 
 
 	function handleLogout(){
+		// control logout process when the logout button is clicked
 		props.toggleNav()
 		dispatch(logout())
 		router.push('/')

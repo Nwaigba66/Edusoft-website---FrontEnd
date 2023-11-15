@@ -16,30 +16,37 @@ export default function SideBar({displaySearch, toggleSidebar}:{
   toggleSidebar:()=>void
 }) {
 
+  // define the Sidebar visuals and logic
+
   const [searchForm, setSearchForm] = useState(initialFormState);
   const { data, isLoading } = useFetchOptionsQuery();
   const { search, course } = searchForm
-  const courseRef = useRef<HTMLSelectElement>(null)
-  const countryRef = useRef<HTMLSelectElement>(null)
-
+  const courseRef = useRef<HTMLSelectElement>(null)  // track the course option
+  const countryRef = useRef<HTMLSelectElement>(null) // track the country option
   const router = useRouter()
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>)=>{
+    // manage the search form submission
+
     e.preventDefault();
-    const course = courseRef.current?.value;
-    const country = countryRef.current?.value;
-    const searchData = `${search? "search=" + search: ""}`
-    const countryData = `${country != "select" ? "country=" + country:""}`
-    const courseData = `${course != "select" ? "course=" + course:""}`
+    const course = courseRef.current?.value;  // get the value of course
+    const country = countryRef.current?.value;  // get the value of country
+    const searchData = `${search? "search=" + search: ""}`  // set the url format for search query
+    const countryData = `${country != "select" ? "country=" + country:""}`  // set url format for country query
+    const courseData = `${course != "select" ? "course=" + course:""}`  // set url format for course query
 
     if (countryData.length > 0 || courseData.length > 0 || search.length > 0){
-      toggleSidebar()
+      toggleSidebar()   // effective only for smaller screen
+
+      // create a url from non empty search queries and switch to the url
       router.push(`/search/?${search ?searchData:""}${countryData? "&" + countryData :""}${courseData? "&" + courseData:""}`) 
     }
     
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+    // handles input entered by user
+    
     e.preventDefault()
     const { name,value} = e.target
     setSearchForm(prevState=>({

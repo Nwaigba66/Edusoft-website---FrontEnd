@@ -1,3 +1,4 @@
+/* Define Interfaces required by typescript for various part of the application*/
 
 interface CourseType {
 	id:string;

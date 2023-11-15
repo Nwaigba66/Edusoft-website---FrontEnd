@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script';
 import './globals.css'
 import Layout, { StoreProvider } from '@/components/Layout'
 
@@ -22,6 +23,8 @@ export default async function RootLayout(props: {
           </Layout>
         </StoreProvider>
       </body>
+        {/*Scripts for Accordion components*/}
+        <Script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js" />
     </html>
   )
 }

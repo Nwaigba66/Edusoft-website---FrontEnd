@@ -9,6 +9,8 @@ interface FormProps {
   option?: string[] 
 }
  
+
+ // object representing the initial state of the form elements
 const initialFormState : {
   [key: string]:FormProps
 } = {
@@ -37,9 +39,12 @@ const initialFormState : {
       name:'Additional Message',
       type:'text',
     },
-
 }
+
+
 function Consultation() {
+  // Define the consultation page logic
+  
   return (
     <div className='flex flex-col w-full h-full'> 
           
