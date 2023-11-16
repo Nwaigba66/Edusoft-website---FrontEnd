@@ -11,7 +11,10 @@ function Contact() {
       </div>
 
       <div className="mt-6 justify-around grid grid-col-2">
-        <Image src="/image/consultation-img.jpeg" alt="" width={600} height={280} /> 
+        <div className="contact-img w-100">
+          <Image src="/image/consultation.jpeg" alt="" width={600} height={280} /> 
+        </div>
+        
         <div className='items-center justify-center mt-6 ml-5'> 
         <h1 className='text-xl'>Overcome your obstacles. Get The Right Information, Today!
         </h1>

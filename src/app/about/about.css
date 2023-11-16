@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.contributor-img img{
+	@apply rounded-full;
+}
