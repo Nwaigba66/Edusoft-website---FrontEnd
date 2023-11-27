@@ -1,6 +1,8 @@
 import { url } from 'inspector'
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import './about.css'
 
 
 // array of objects representing a description of each principles
@@ -31,6 +33,42 @@ const principlesList = [
   },
 ]
 
+const contributors = [
+    {
+      name: "Idris Adebowale",
+      role: "Backend Engineer",
+      picture:"/image/idris_pics.jpg",
+      social: [
+          {
+            url: "https://twitter.com/idrys_yemi",
+            icon:'/image/x-image.png'
+          },
+          {
+            url:"https://github.com/idris01",
+            icon: '/image/github.png'
+          },
+          {
+            url: "https://www.linkedin.com/in/idris-adebowale",
+            icon: '/image/linkedin.png'
+          },
+        ],
+    },
+    {
+      name: "Gloria Nwaigba",
+      role: "Frontend Engineer",
+      picture:"/image/gloria_pics.jpg",
+      social: [
+          {
+            url: "https://twitter.com/bellafinegirl",
+            icon:'/image/x-image.png'
+          },
+          {
+            url: "https://github.com/Nwaigba66",
+            icon: '/image/github.png'
+          }
+        ],
+    },
+  ]
 
 function About() {
  // About page
@@ -85,7 +123,30 @@ function About() {
         
       </div>
 
+      <div className="contributors min-h-[10rem] flex flex-col justify-center w-full">
+      <h3 className="text-2xl text-center border-b-2">Contributors</h3>
+        <div className="flex flex-row gap-4 justify-center gap-4 flex-wrap">
+        {contributors.map(({name, role, picture, social})=><div key={role} className="flex gap-4 mt-4 border rounded p-1">
+            <div className="contributor-img">
+                    <Image src={picture} width={50} height={50} alt="" priority/>
+            </div>
+            <div>
+              <h3>Role: <span className="text-lg">{role}</span></h3>
+              <div className="flex flex-row gap-4">
+                {social.map(({url, icon})=><div key={url}>
+                <Link href={url}>
+                  <Image src={icon} width={20} height={20} alt="" />
+                </Link>
+                
+              </div>)}
+              </div>
+ 
+            </div>
 
+          </div>
+        )}
+        </div>
+      </div>
     </div>
       
      
